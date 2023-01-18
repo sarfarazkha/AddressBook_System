@@ -1,101 +1,40 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class AddressBook {
 
-    private String firstName, lastName, address, city, state, email;
-    private int zip;
-    private long phone;
+    static Scanner sc = new Scanner(System.in);
+    ArrayList<Contacts> list = new ArrayList<>();
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void newContact(){
+        System.out.println("Enter First Name");
+        String firstName = sc.nextLine();
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+        System.out.println("Enter last Name");
+        String lastName = sc.nextLine();
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+        System.out.println("Enter State");
+        String state = sc.nextLine();
 
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
+        System.out.println("Enter City");
+        String city = sc.nextLine();
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+        System.out.println("Enter Address");
+        String address = sc.nextLine();
 
-    public void setState(String state) {
-        this.state = state;
-    }
+        System.out.println("Enter phone number");
+        long phone = sc.nextLong();
 
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
+        System.out.println("Enter email");
+        String email = sc.nextLine();
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        System.out.println("Enter zip");
+        int zip = sc.nextInt();
 
-    public String getFirstName() {
-        return firstName;
-    }
+        Contacts cList = new Contacts(firstName, lastName, address, zip, city,state,phone,email);
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public int getZip() {
-        return zip;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public long getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    AddressBook() {
-
-    }
-
-    public AddressBook(String firstName, String lastName, String address, int zip, String city, String state, long phone, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.zip = zip;
-        this.city = city;
-        this.state = state;
-        this.phone = phone;
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Contacts{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", zip='" + zip + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        list.add(cList);
     }
 }
