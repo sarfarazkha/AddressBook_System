@@ -8,12 +8,18 @@ public class AddressBookMain {
 
         AddressBook a1 = new AddressBook();
         a1.addnewContact();
+        System.out.println("***************************");
 
         a1.addnewContact();
         System.out.println(a1.list);
 
-        a1.editContact();
+          a1.editContact();
+        System.out.println(a1.list);
 
-        a1.deleteContact();
+          a1.deleteContact();
+        System.out.println(a1.list);
+
+         a1.addMultipleAddressBook();
+
     }
 }
