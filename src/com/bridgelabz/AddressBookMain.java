@@ -1,78 +1,56 @@
 package com.bridgelabz;
 
+import java.util.Scanner;
+
 public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        System.out.println("Welcome to address book program");
+        System.out.println("**********Phone Book**********");
+        Scanner sc = new Scanner(System.in);
 
-        AddressBook a1 = new AddressBook();
-        a1.newContact();
-        a1.newContact();
+        AddServices add = new AddServices();
 
-        System.out.println(a1.list);
+        AddressBook multi = new AddressBook();
 
-        System.out.println("Enter name whose details you want to edit");
-        String name = AddressBook.sc.nextLine();
+        while (true) {
+            System.out.println("Enter to avail services: ");
+            System.out.println("1: To add contact \n2: To edit existing contact \n3: To delete contact "
+                    + "\n4: To display contact list \n5: find contacts "
+                    + " \n6: Add Multiple Address Book \n7: Add Contact to multi Address Book \n8: display Multiple Address book \n0: To Exit");
 
-        for (Contacts x : a1.list) {
-            if (x.getFirstName().equals(name)) {
-                System.out.println("Enter which details you want to edit eg. firstName, lastName etc ");
-                String check = AddressBook.sc.nextLine();
-                switch (check) {
-                    case "firstName":
-                        System.out.println("Rename first Name to  ");
-                        x.setFirstName(AddressBook.sc.nextLine());
-                        break;
-                    case "lastName":
-                        System.out.println("Rename last Name to  ");
-                        x.setLastName(AddressBook.sc.nextLine());
-                        break;
-                    case "address":
-                        System.out.println("Rename address to  ");
-                        x.setAddress(AddressBook.sc.nextLine());
-                        break;
-                    case "city":
-                        System.out.println("Rename city to  ");
-                        x.setCity(AddressBook.sc.nextLine());
-                        break;
-                    case "zip":
-                        System.out.println("Rename zip to  ");
-                        x.setZip(AddressBook.sc.nextInt());
-                        break;
-                    case "phone":
-                        System.out.println("Rename phone to  ");
-                        x.setPhone(AddressBook.sc.nextLong());
-                        break;
-                    case "email":
-                        System.out.println("Rename email to  ");
-                        x.setEmail(AddressBook.sc.nextLine());
-                        break;
-                    case "state":
-                        System.out.println("Rename state to  ");
-                        x.setState(AddressBook.sc.nextLine());
-                        break;
-                    default:
-                        System.out.println("invalid entry");
-                }
+            int ch = sc.nextInt();
+
+            switch (ch) {
+                case 1:
+                    add.numberOfTimes();
+                    break;
+                case 2:
+                    add.edit();
+                    break;
+                case 3:
+                    add.delete();
+                    break;
+                case 4:
+                    add.display();
+                    break;
+                case 5:
+                    add.findContact();
+                    break;
+                case 6:
+                    multi.AddMultipleAddressBook();
+                    break;
+                case 7:
+                    multi.addingContacts();
+                    break;
+                case 8:
+                    multi.printaddressBook();
+                    break;
+                case 0:
+                    sc.close();
+                    return;
+
             }
         }
-
-        System.out.println(a1.list);
-
-        System.out.println("Delete a contact using name " );
-        String name1 = AddressBook.sc.nextLine();
-
-        int count=0;
-
-        for(Contacts x : a1.list){
-            if(x.getFirstName().equals(name1)){
-                a1.list.remove(count);
-                break;
-            }
-            count++;
-        }
-        System.out.println(a1.list);
-
     }
 }

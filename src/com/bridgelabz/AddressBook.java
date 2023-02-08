@@ -1,40 +1,54 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
 
 public class AddressBook {
 
-    static Scanner sc = new Scanner(System.in);
-    ArrayList<Contacts> list = new ArrayList<>();
 
-    public void newContact(){
-        System.out.println("Enter First Name");
-        String firstName = sc.nextLine();
+    Map<String, AddServices> addressBookSystem = new HashMap<>();
+    Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter last Name");
-        String lastName = sc.nextLine();
 
-        System.out.println("Enter State");
-        String state = sc.nextLine();
+    public void AddMultipleAddressBook() {
+        System.out.println("Enter the name of address book :");
 
-        System.out.println("Enter City");
-        String city = sc.nextLine();
+        String bookName = sc.next();
 
-        System.out.println("Enter Address");
-        String address = sc.nextLine();
+        if (addressBookSystem.containsKey(bookName)) {
+            System.out.println("Book Already Exists");
+        } else {
+            AddServices service = new AddServices();
+            addressBookSystem.put(bookName, service);
+            System.out.println("created new address book");
 
-        System.out.println("Enter phone number");
-        long phone = sc.nextLong();
+        }
+    }
 
-        System.out.println("Enter email");
-        String email = sc.nextLine();
+    public void addingContacts() {
+        System.out.println("Enter name of adress book you want to add contatcts in");
+        String existingBook = sc.next();
 
-        System.out.println("Enter zip");
-        int zip = sc.nextInt();
+        addressBookSystem.get(existingBook);
+        try {
+            if (existingBook == null) {
+                System.out.println("Book Not Exist");
+            } else {
+                addressBookSystem.get(existingBook).addPerson();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Book not Exist..try again");
+        }
 
-        Contacts cList = new Contacts(firstName, lastName, address, zip, city,state,phone,email);
+    }
 
-        list.add(cList);
+
+    public void printaddressBook() {
+        for (String i : addressBookSystem.keySet()) {
+            System.out.println(i);
+            System.out.println(addressBookSystem.get(i).contacts);
+        }
     }
 }
