@@ -5,21 +5,36 @@ import java.util.Scanner;
 
 public class AddServices {
 
-    String name;
     ArrayList<Contacts> contacts = new ArrayList<Contacts>();
     Scanner s = new Scanner(System.in);
 
 
+    String name;
+
     public void numberOfTimes() {
         System.out.println("Enter the number of contacts to add");
         int number = s.nextInt();
-        for (int i = 1; i <= number; i++) {
+        for (int i = 1; i <= number;) {
             System.out.println("Enter the contact details of person ");
             duplicateCheck();
+            i++;
+
         }
     }
 
+    public void duplicateCheck() {
+        System.out.print(" Please enter the first name: ");
+        name = s.next();
+        for(Contacts i : contacts) {
+            if(i.getFirstName().equals(name)) {
+                System.out.println(" Given name already exists");
+            } return;
+        }  addPerson();
+    }
+
+
     public void addPerson() {
+
 
         String firstName = name;
 
@@ -44,7 +59,7 @@ public class AddServices {
         System.out.println("Enter the phoneNo name");
         Long phoneNo = s.nextLong();
 
-        Contacts newContact = new Contacts(firstName, lastName, address, city, state, zipNo, phoneNo, email);
+        Contacts newContact = new Contacts(firstName, lastName, address, zipNo, state, city, phoneNo, email);
         contacts.add(newContact);
 
     }
@@ -54,11 +69,44 @@ public class AddServices {
         System.out.println(contacts);
     }
 
+    public Contacts findbyCity() { // to find the contacts
+        System.out.println("\n Enter the city : ");
+        String name = s.next();
+        int duplicate = 0; // will increment the duplicate if found multiple contacts with same name
+        Contacts temp = null;
 
-    public Contacts findContact() {
+        for (Contacts contact : contacts) {
+
+            if (contact.getCity().equals(name)) {
+
+                duplicate++;
+                temp = contact;
+                System.out.println(contact);
+            }
+        }
+        if (duplicate == 1) {
+            return temp;
+
+        } else if (duplicate > 1) {
+            System.out.print(" There are multiple contacts with given name.\n Please enter their state id: ");
+            String state = s.next();
+            for (Contacts contact : contacts) {
+                if (contact.getCity().equals(name) && contact.getState().equals(state)) {
+                    return contact;
+                }
+            }
+        } else {
+            System.out.println("No contact with the given cty. Please enter the correct city");
+            findContact();
+        }
+        return temp;
+    }
+
+
+    public Contacts findContact() { // to find the contacts
         System.out.println("\n Enter the first name of the contact to edit: ");
         String name = s.next();
-        int duplicate = 0;
+        int duplicate = 0; // will increment the duplicate if found multiple contacts with same name
         Contacts temp = null;
 
         for (Contacts contact : contacts) {
@@ -87,7 +135,6 @@ public class AddServices {
         }
         return temp;
     }
-
 
     public void edit() {
         Contacts contact = findContact();
@@ -147,19 +194,6 @@ public class AddServices {
         }
         System.out.println("Contacts Updated: " + contact);
     }
-
-    public void duplicateCheck() {
-        System.out.print(" Please enter the first name: ");
-        name = s.next();
-        for (Contacts i : contacts) {
-            if (i.getFirstName().equals(name)) {
-                System.out.println(" Given name already exists");
-            }
-            return;
-        }
-        addPerson();
-    }
-
 
     public void delete() {
         Contacts contact = findContact();
