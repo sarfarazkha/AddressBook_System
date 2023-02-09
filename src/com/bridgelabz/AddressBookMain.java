@@ -6,54 +6,52 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        System.out.println("**********Phone Book**********");
+        System.out.println("*************************Address Book*****************************");
         Scanner sc = new Scanner(System.in);
-        AddServices add = new AddServices(); // created objects
 
-        AddressBook multi = new AddressBook();
+        AddressBook obj = new AddressBook();
 
         while (true) {
-            System.out.println("Enter to avail services: ");
-            System.out.println(
-                    "1: To add contact \n2: To edit existing contact \n3: To delete contact "
-                            + "\n4: To display contact list \n5: find contacts "
-                            + " \n6: Add Multiple Address Book \n7: Add Contact to multi Address Book \n8: display Multiple Address book "
-                            + "\n9: find by city\n0: To Exit");
-
-            int ch = sc.nextInt();
-
-            switch (ch) {
+            System.out.println("Enter \n 1. Add  new AddressBook\n 2. Add contact in AddressBook\n "
+                    + "3. edit the contact in AddressBook\n 4. delete the contact in AddressBook\n 5. delete the AddressBook\n "
+                    + "6. Print the AddressBook\n 7. Print the contacts in AddressBook\n 8. Search by City. \n 9. Search by State \n 0. To exit");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            switch (choice) {
                 case 1:
-                    add.numberOfTimes();
+                    obj.addAddressBook();
                     break;
                 case 2:
-                    add.edit();
+                    obj.addContact();
                     break;
                 case 3:
-                    add.delete();
+                    obj.editContactInBook();
                     break;
                 case 4:
-                    add.display();
+                    obj.deleteContactInBook();
                     break;
                 case 5:
-                    add.findContact();
+                    obj.deleteAddressBook();
                     break;
                 case 6:
-                    multi.AddMultipleAddressBook();
+                    obj.printBook();
                     break;
                 case 7:
-                    multi.addingContacts();
+                    obj.printContactsInBook();
                     break;
                 case 8:
-                    multi.printaddressBook();
+                    obj.searchByCity();
+                    ;
                     break;
                 case 9:
-                    add.findbyCity();
+                    obj.searchByState();
+                    break;
                 case 0:
-                    sc.close();
-                    return;
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter the wrong input");
             }
         }
-
     }
 }
