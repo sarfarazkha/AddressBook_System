@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookServices {
     Scanner sc = new Scanner(System.in);
@@ -12,6 +13,8 @@ public class AddressBookServices {
 
     List<Contacts> contacts = new ArrayList<Contacts>();
     Map<String, AddressBookServices> addressBookMap = new HashMap<>();
+    public static HashMap<String, ArrayList<Contacts>> personByCity = new HashMap<String, ArrayList<Contacts>>();
+    public static HashMap<String, ArrayList<Contacts>> personByState = new HashMap<String, ArrayList<Contacts>>();
     Contacts person = new Contacts();
 
     public void duplicateCheck() {
@@ -109,7 +112,7 @@ public class AddressBookServices {
                 + "\n 3.Edit address" + "\n 4.Edit city" + "\n 5.Edit state" + "\n 6.Edit zipcode"
                 + "\n 7.Edit phone number" + "\n 8.Edit email");
 
-        int choice = sc.nextInt(); // with the help of setters setting the new details
+        int choice = sc.nextInt();
         switch (choice) {
             case 1:
                 System.out.println("Enter new first name");
@@ -191,4 +194,23 @@ public class AddressBookServices {
         System.out.println("The contact has been deleted from the Address Book");
     }
 
+    public void addPersonToCity(Contacts contact) {
+        if (personByCity.containsKey(contact.getCity())) {
+            personByCity.get(contact.getCity()).add(contact);
+        } else {
+            ArrayList<Contacts> cityList = new ArrayList<Contacts>();
+            cityList.add(contact);
+            personByCity.put(contact.getCity(), cityList);
+        }
+    }
+
+    public void addPersonToState(Contacts contact) {
+        if (personByState.containsKey(contact.getState())) {
+            personByState.get(contact.getState()).add(contact);
+        } else {
+            ArrayList<Contacts> stateList = new ArrayList<Contacts>();
+            stateList.add(contact);
+            personByState.put(contact.getState(), stateList);
+        }
+    }
 }

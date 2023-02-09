@@ -1,5 +1,4 @@
 package com.bridgelabz;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,5 +109,27 @@ public class AddressBook {
             arr.stream().filter(person -> person.getState().equals(stateName))
                     .forEach(person -> System.out.println(person.getFirstName()));
         }
+    }
+
+    public void displayPeopleByRegion(HashMap<String, ArrayList<Contacts>> addressBookMap) {
+        System.out.println("Enter the name of the region :");
+        String regionName = scanner.next();
+
+        addressBookMap.values().stream()
+                .map(region -> region.stream()
+                        .filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+                .forEach(person -> person.forEach(personDetails -> System.out.println(personDetails)));
+    }
+
+    public void countPeopleByRegion(HashMap<String, ArrayList<Contacts>> listToDisplay) {
+
+        System.out.println("Enter the name of the region :");
+        String regionName = scanner.next();
+        long countPeople = listToDisplay.values().stream()
+                .map(region -> region.stream().filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+                .count();
+
+        System.out.println("Number of People residing in " + regionName + " are: " + countPeople + "\n");
+
     }
 }
