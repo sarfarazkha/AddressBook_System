@@ -40,7 +40,6 @@ public class AddressBookMain {
             }
         }
     }
-
     public static void main(String[] args) {
         AddressBookMain addressBookMain = new AddressBookMain();
         addressBookMain.choose();
