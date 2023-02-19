@@ -1,5 +1,9 @@
 package com.bridgelabz;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -41,6 +45,32 @@ public class AddressBookMain {
         }
     }
     public static void main(String[] args) {
+        System.out.println("Welcome To Address Book Program");
+        Scanner Scan = new Scanner(System.in);
+
+        try {
+            InputStream inputStream = new FileInputStream(
+                    "C:\\Users\\Lenovo\\IdeaProjects\\AdressBook\\src\\com\\bridgelabz\\ContctsFile");
+            int byteData = inputStream.read();
+            if (byteData != -1) {
+                System.out.println(byteData);
+            }
+        } catch (IOException e2) {
+
+        }
+
+        File file = new File(
+                "C:\\Users\\Lenovo\\IdeaProjects\\AdressBook\\src\\com\\bridgelabz\\ContctsFile");
+        try {
+            boolean isFileCreated = file.createNewFile();
+            if (isFileCreated) {
+                System.out.println("File Created successfully!!1");
+            } else {
+                System.out.println("Something went wrong or file already exist");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         AddressBookMain addressBookMain = new AddressBookMain();
         addressBookMain.choose();
     }
